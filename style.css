@@ -112,13 +112,16 @@ h2 {
   pointer-events: none;
 }
 
-#candle img {
+#candle img,
+#background img {
   width: min(12vw, 8rem);
   margin-top: 1rem;
   cursor: pointer;
+  border-radius: 12px;
 }
 
-#candle figcaption {
+#candle figcaption,
+#background figcaption {
   text-align: center;
   margin-top: 0.5rem;
 }
