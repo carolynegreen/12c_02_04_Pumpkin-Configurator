@@ -25,7 +25,9 @@ body {
 }
 
 #pumpkin {
-  background-color: orange;
+  background-color: white;
+  width: 40vw;
+  height: 40vw;
 }
 
 .sidenavigation {
