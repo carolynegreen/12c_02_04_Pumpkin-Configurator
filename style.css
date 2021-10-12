@@ -1,9 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
+
+:root {
+  --font-1: "Creepster", cursive;
+  --color-1: #ffa900;
+}
+
 body {
   margin-left: 2vw;
 }
 
+header h1 {
+  font-family: var(--font-1);
+  font-size: 5vw;
+  letter-spacing: 0.5vw;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  color: white;
+  padding: 10px;
+}
+
 #container {
-  background-color: lightblue;
   display: flex;
   flex-direction: row;
   gap: 1vw;
@@ -12,24 +31,41 @@ body {
 #colors {
   display: flex;
   flex-wrap: wrap;
-  width: 14vw;
-  background-color: black;
+  justify-content: center;
+  width: 25%;
+  background-color: var(--color-1);
+  box-shadow: 3px 3px 1px #ff7600;
+  border-radius: 12px;
+  padding-bottom: 12px;
 }
 
 .colorbtn {
   background-color: yellow;
   border-radius: 100%;
   width: 4vw;
-  height: 8vh;
-  margin: 1em;
+  height: 4vw;
+  margin: 10px;
 }
 
 #pumpkin {
-  background-color: orange;
+  background-image: url(/img/pumpkin.jpg);
+  width: 80%;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .sidenavigation {
-  background-color: orangered;
+  width: 50%;
+  background-color: var(--color-1);
+  box-shadow: 3px 3px 1px #ff7600;
+  border-radius: 12px;
+  padding: 2vw;
+}
+
+#categories div {
+  font-size: 2vw;
+  color: white;
+  margin-bottom: 4vh;
 }
 
 #options {
