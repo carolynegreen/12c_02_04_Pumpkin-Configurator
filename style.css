@@ -59,6 +59,8 @@ h2 {
   box-shadow: 3px 3px 1px #ff7600;
   border-radius: 12px;
   padding: 2vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 #categories div {
@@ -69,5 +71,28 @@ h2 {
 
 #options {
   width: auto;
-  background-color: green;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+  border-radius: 12px;
+}
+
+.option {
+  display: flex;
+  justify-content: center;
+}
+
+.option img {
+  width: min(12vw, 8rem);
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.option img:hover {
+  transform: scale(1.1);
+}
+
+.hidden {
+  display: none;
 }
