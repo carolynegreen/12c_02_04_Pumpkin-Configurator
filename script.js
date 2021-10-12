@@ -2,30 +2,25 @@
 window.addEventListener("DOMContentLoaded", start);
 
 let elementToPaint;
+const settings = {
+  lit: true,
+};
 // let svgCuttings;
 
 async function start() {
   console.log("start");
+  //Importing the main picture
   let respPumpkin = await fetch("img/pumpkin.svg");
   let svgPumpkin = await respPumpkin.text();
   document.querySelector("#pumpkin").innerHTML = svgPumpkin;
 
-  let respMouths = await fetch("img/pumpkinMouths.svg");
-  let svgMouths = await respMouths.text();
-  let respEyes = await fetch("img/pumpkinEyes.svg");
-  let svgEyes = await respEyes.text();
-  let respNoses = await fetch("img/pumpkinNoses.svg");
-  let svgNoses = await respNoses.text();
-
-  //there are 6 items in each SVG. We need to somehow divide them up and place them in a flex or grid inside the options menu.
-  //if this isn't possible I can save each item individually, but it's a lot of files to import.
-  //#eyes #mouth #nose
   setMenuListeners();
   manipulateSVG();
 }
 
 function manipulateSVG() {
   console.log("manipulation");
+  // importEyes(2);
   selectPumpkinGroups();
   noClickOnShadows();
   document.querySelectorAll(".g_to_interact_with").forEach(prepareArea);
@@ -70,10 +65,12 @@ function removeStroke(area) {
 }
 
 function setMenuListeners() {
-  console.log("hello");
   document.querySelector("#categories div:nth-of-type(1)").addEventListener("click", toggleMenu);
   document.querySelector("#categories div:nth-of-type(2)").addEventListener("click", toggleMenu);
   document.querySelector("#categories div:nth-of-type(3)").addEventListener("click", toggleMenu);
+  document.querySelectorAll("#options #eyes .option").forEach((option) => option.addEventListener("click", importEyes));
+  document.querySelectorAll("#options #nose .option").forEach((option) => option.addEventListener("click", importNose));
+  document.querySelectorAll("#options #mouth .option").forEach((option) => option.addEventListener("click", importMouth));
 }
 
 function toggleMenu() {
@@ -83,4 +80,90 @@ function toggleMenu() {
 
   let idName = this.textContent.toLowerCase();
   document.querySelector(`#${idName}`).classList.remove("hidden");
+}
+
+async function importEyes(choice) {
+  // console.log(choice.path[0].attributes[2].value);
+  choice = choice.path[0].attributes[2].value;
+  // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
+  let respEye = await fetch(`img/eye${choice}.svg`);
+  let svgEye = await respEye.text();
+  document.querySelector("#pumpkin-container .eye").innerHTML = svgEye;
+  if (settings.lit === true) {
+    document.querySelectorAll(`#eyes${choice} path`).forEach(colorElementOrange);
+    document.querySelectorAll(`#eyes${choice} #shell path`).forEach(colorElementBrown);
+    function colorElementOrange(area) {
+      area.style.fill = "#f9b332";
+    }
+    function colorElementBrown(area) {
+      area.style.fill = "#b07e4a";
+    }
+  } else {
+    document.querySelectorAll(`#eyes${choice} path`).forEach(colorElementBlack);
+    document.querySelectorAll(`#eyes${choice} #shell path`).forEach(colorElementBrown);
+    function colorElementBrown(area) {
+      area.style.fill = "#432918";
+    }
+    function colorElementBlack(area) {
+      area.style.fill = "black";
+    }
+  }
+}
+
+async function importNose(choice) {
+  // console.log(choice.path[0].attributes[2].value);
+  choice = choice.path[0].attributes[2].value;
+  // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
+  let respNose = await fetch(`img/nose${choice}.svg`);
+  let svgNose = await respNose.text();
+  document.querySelector("#pumpkin-container .nose").innerHTML = svgNose;
+  if (settings.lit === true) {
+    document.querySelectorAll(`#nose${choice} path`).forEach(colorElementOrange);
+    document.querySelectorAll(`#nose${choice} #shell`).forEach(colorElementBrown);
+    document.querySelectorAll(`#nose${choice} #shell path`).forEach(colorElementBrown);
+    function colorElementOrange(area) {
+      area.style.fill = "#f9b332";
+    }
+    function colorElementBrown(area) {
+      area.style.fill = "#b07e4a";
+    }
+  } else {
+    document.querySelectorAll(`#nose${choice} path`).forEach(colorElementBlack);
+    document.querySelectorAll(`#nose${choice} #shell`).forEach(colorElementBrown);
+    document.querySelectorAll(`#nose${choice} #shell path`).forEach(colorElementBrown);
+    function colorElementBrown(area) {
+      area.style.fill = "#432918";
+    }
+    function colorElementBlack(area) {
+      area.style.fill = "black";
+    }
+  }
+}
+
+async function importMouth(choice) {
+  // console.log(choice.path[0].attributes[2].value);
+  choice = choice.path[0].attributes[2].value;
+  // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
+  let respMouth = await fetch(`img/mouth${choice}.svg`);
+  let svgMouth = await respMouth.text();
+  document.querySelector("#pumpkin-container .mouth").innerHTML = svgMouth;
+  if (settings.lit === true) {
+    document.querySelectorAll(`#mouth${choice} path`).forEach(colorElementOrange);
+    document.querySelectorAll(`#mouth${choice} #shell path`).forEach(colorElementBrown);
+    function colorElementOrange(area) {
+      area.style.fill = "#f9b332";
+    }
+    function colorElementBrown(area) {
+      area.style.fill = "#b07e4a";
+    }
+  } else {
+    document.querySelectorAll(`#mouth${choice} path`).forEach(colorElementBlack);
+    document.querySelectorAll(`#mouth${choice} #shell path`).forEach(colorElementBrown);
+    function colorElementBrown(area) {
+      area.style.fill = "#432918";
+    }
+    function colorElementBlack(area) {
+      area.style.fill = "black";
+    }
+  }
 }
