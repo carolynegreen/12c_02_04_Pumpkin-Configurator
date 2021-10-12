@@ -8,7 +8,6 @@ const settings = {
   eyes: 1,
   nose: 1,
 };
-// let svgCuttings;
 
 async function start() {
   console.log("start");
@@ -38,6 +37,7 @@ function selectPumpkinGroups() {
 function noClickOnShadows() {
   console.log("noClickOnShadows");
   document.querySelector("#new_shadow_Image").style.pointerEvents = "none";
+  document.querySelector("#new_shadow_Image").style.zIndex = "20";
 }
 
 function prepareArea(area) {
@@ -52,6 +52,7 @@ function prepareArea(area) {
   function removeFill(path) {
     path.removeAttribute("fill");
   }
+  area.style.zIndex = "20";
   area.addEventListener("click", setElementToPaint);
 }
 
@@ -73,11 +74,12 @@ function setMenuListeners() {
   document.querySelector("#categories div:nth-of-type(3)").addEventListener("click", toggleMenu);
   document.querySelector("#categories div:nth-of-type(4)").addEventListener("click", toggleMenu);
   document.querySelector("#categories div:nth-of-type(5)").addEventListener("click", toggleMenu);
-  document.querySelectorAll("#options #eyes .option").forEach((option) => option.addEventListener("click", importEyes));
-  document.querySelectorAll("#options #nose .option").forEach((option) => option.addEventListener("click", importNose));
-  document.querySelectorAll("#options #mouth .option").forEach((option) => option.addEventListener("click", importMouth));
+  document.querySelectorAll("#options #eyes .option").forEach((option) => option.addEventListener("click", setEyes));
+  document.querySelectorAll("#options #nose .option").forEach((option) => option.addEventListener("click", setNose));
+  document.querySelectorAll("#options #mouth .option").forEach((option) => option.addEventListener("click", setMouth));
   document.querySelector("#candle img").addEventListener("click", toggleLight);
   document.querySelector("#candle figcaption").addEventListener("click", toggleLight);
+  document.querySelectorAll("#background figure").forEach((option) => option.addEventListener("click", toggleBackground));
 }
 
 function toggleMenu() {
@@ -103,18 +105,32 @@ function toggleLight() {
     document.querySelector("#candle img").src = "img/lit-candle.png";
     document.querySelector("#candle figcaption").textContent = "click to extinguish candle";
   }
+
+  colorEye();
+  colorMouth();
+  colorNose();
 }
 
-async function importEyes(choice) {
-  // console.log(choice.path[0].attributes[2].value);
+function setEyes(choice) {
   choice = choice.path[0].attributes[2].value;
+  settings.eyes = choice;
+  importEyes();
+}
+
+async function importEyes() {
+  // console.log(choice.path[0].attributes[2].value);
+  // choice = choice.path[0].attributes[2].value;
   // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
-  let respEye = await fetch(`img/eye${choice}.svg`);
+  let respEye = await fetch(`img/eye${settings.eyes}.svg`);
   let svgEye = await respEye.text();
   document.querySelector("#pumpkin-container .eye").innerHTML = svgEye;
+  colorEye();
+}
+
+function colorEye() {
   if (settings.lit === true) {
-    document.querySelectorAll(`#eyes${choice} path`).forEach(colorElementOrange);
-    document.querySelectorAll(`#eyes${choice} #shell path`).forEach(colorElementBrown);
+    document.querySelectorAll(`#eyes${settings.eyes} path`).forEach(colorElementOrange);
+    document.querySelectorAll(`#eyes${settings.eyes} #shell path`).forEach(colorElementBrown);
     function colorElementOrange(area) {
       area.style.fill = "#f9b332";
     }
@@ -122,8 +138,8 @@ async function importEyes(choice) {
       area.style.fill = "#b07e4a";
     }
   } else {
-    document.querySelectorAll(`#eyes${choice} path`).forEach(colorElementBlack);
-    document.querySelectorAll(`#eyes${choice} #shell path`).forEach(colorElementBrown);
+    document.querySelectorAll(`#eyes${settings.eyes} path`).forEach(colorElementBlack);
+    document.querySelectorAll(`#eyes${settings.eyes} #shell path`).forEach(colorElementBrown);
     function colorElementBrown(area) {
       area.style.fill = "#432918";
     }
@@ -133,17 +149,27 @@ async function importEyes(choice) {
   }
 }
 
-async function importNose(choice) {
-  // console.log(choice.path[0].attributes[2].value);
+function setNose(choice) {
   choice = choice.path[0].attributes[2].value;
+  settings.nose = choice;
+  importNose();
+}
+
+async function importNose() {
+  // console.log(choice.path[0].attributes[2].value);
+  // choice = choice.path[0].attributes[2].value;
   // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
-  let respNose = await fetch(`img/nose${choice}.svg`);
+  let respNose = await fetch(`img/nose${settings.nose}.svg`);
   let svgNose = await respNose.text();
   document.querySelector("#pumpkin-container .nose").innerHTML = svgNose;
+  colorNose();
+}
+
+function colorNose() {
   if (settings.lit === true) {
-    document.querySelectorAll(`#nose${choice} path`).forEach(colorElementOrange);
-    document.querySelectorAll(`#nose${choice} #shell`).forEach(colorElementBrown);
-    document.querySelectorAll(`#nose${choice} #shell path`).forEach(colorElementBrown);
+    document.querySelectorAll(`#nose${settings.nose} path`).forEach(colorElementOrange);
+    document.querySelectorAll(`#nose${settings.nose} #shell`).forEach(colorElementBrown);
+    document.querySelectorAll(`#nose${settings.nose} #shell path`).forEach(colorElementBrown);
     function colorElementOrange(area) {
       area.style.fill = "#f9b332";
     }
@@ -151,9 +177,9 @@ async function importNose(choice) {
       area.style.fill = "#b07e4a";
     }
   } else {
-    document.querySelectorAll(`#nose${choice} path`).forEach(colorElementBlack);
-    document.querySelectorAll(`#nose${choice} #shell`).forEach(colorElementBrown);
-    document.querySelectorAll(`#nose${choice} #shell path`).forEach(colorElementBrown);
+    document.querySelectorAll(`#nose${settings.nose} path`).forEach(colorElementBlack);
+    document.querySelectorAll(`#nose${settings.nose} #shell`).forEach(colorElementBrown);
+    document.querySelectorAll(`#nose${settings.nose} #shell path`).forEach(colorElementBrown);
     function colorElementBrown(area) {
       area.style.fill = "#432918";
     }
@@ -163,16 +189,27 @@ async function importNose(choice) {
   }
 }
 
-async function importMouth(choice) {
-  // console.log(choice.path[0].attributes[2].value);
+function setMouth(choice) {
   choice = choice.path[0].attributes[2].value;
+  settings.mouth = choice;
+  importMouth();
+}
+
+async function importMouth() {
+  // console.log(choice.path[0].attributes[2].value);
+  // choice = choice.path[0].attributes[2].value;
   // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
-  let respMouth = await fetch(`img/mouth${choice}.svg`);
+  let respMouth = await fetch(`img/mouth${settings.mouth}.svg`);
   let svgMouth = await respMouth.text();
   document.querySelector("#pumpkin-container .mouth").innerHTML = svgMouth;
+
+  colorMouth();
+}
+
+function colorMouth() {
   if (settings.lit === true) {
-    document.querySelectorAll(`#mouth${choice} path`).forEach(colorElementOrange);
-    document.querySelectorAll(`#mouth${choice} #shell path`).forEach(colorElementBrown);
+    document.querySelectorAll(`#mouth${settings.mouth} path`).forEach(colorElementOrange);
+    document.querySelectorAll(`#mouth${settings.mouth} #shell path`).forEach(colorElementBrown);
     function colorElementOrange(area) {
       area.style.fill = "#f9b332";
     }
@@ -180,8 +217,8 @@ async function importMouth(choice) {
       area.style.fill = "#b07e4a";
     }
   } else {
-    document.querySelectorAll(`#mouth${choice} path`).forEach(colorElementBlack);
-    document.querySelectorAll(`#mouth${choice} #shell path`).forEach(colorElementBrown);
+    document.querySelectorAll(`#mouth${settings.mouth} path`).forEach(colorElementBlack);
+    document.querySelectorAll(`#mouth${settings.mouth} #shell path`).forEach(colorElementBrown);
     function colorElementBrown(area) {
       area.style.fill = "#432918";
     }
@@ -189,4 +226,10 @@ async function importMouth(choice) {
       area.style.fill = "black";
     }
   }
+}
+
+function toggleBackground() {
+  console.log("toggle background");
+  // document.querySelector("#pumpkin-container .background").backgroundImage.src = `"url('${this.dataset.feature}')"`;
+  document.querySelector("#pumpkin-container .background").style.backgroundImage = "url('" + this.dataset.feature + "')";
 }
