@@ -4,6 +4,9 @@ window.addEventListener("DOMContentLoaded", start);
 let elementToPaint;
 const settings = {
   lit: true,
+  mouth: 1,
+  eyes: 1,
+  nose: 1,
 };
 // let svgCuttings;
 
@@ -68,18 +71,38 @@ function setMenuListeners() {
   document.querySelector("#categories div:nth-of-type(1)").addEventListener("click", toggleMenu);
   document.querySelector("#categories div:nth-of-type(2)").addEventListener("click", toggleMenu);
   document.querySelector("#categories div:nth-of-type(3)").addEventListener("click", toggleMenu);
+  document.querySelector("#categories div:nth-of-type(4)").addEventListener("click", toggleMenu);
+  document.querySelector("#categories div:nth-of-type(5)").addEventListener("click", toggleMenu);
   document.querySelectorAll("#options #eyes .option").forEach((option) => option.addEventListener("click", importEyes));
   document.querySelectorAll("#options #nose .option").forEach((option) => option.addEventListener("click", importNose));
   document.querySelectorAll("#options #mouth .option").forEach((option) => option.addEventListener("click", importMouth));
+  document.querySelector("#candle img").addEventListener("click", toggleLight);
+  document.querySelector("#candle figcaption").addEventListener("click", toggleLight);
 }
 
 function toggleMenu() {
   document.querySelector("#nose").classList.add("hidden");
   document.querySelector("#eyes").classList.add("hidden");
   document.querySelector("#mouth").classList.add("hidden");
+  document.querySelector("#background").classList.add("hidden");
+  document.querySelector("#candle").classList.add("hidden");
 
   let idName = this.textContent.toLowerCase();
   document.querySelector(`#${idName}`).classList.remove("hidden");
+}
+
+function toggleLight() {
+  if (settings.lit === true) {
+    console.log("turn off light");
+    settings.lit = false;
+    document.querySelector("#candle img").src = "img/unlit-candle.png";
+    document.querySelector("#candle figcaption").textContent = "click to turn on candle";
+  } else {
+    console.log("turn on light");
+    settings.lit = true;
+    document.querySelector("#candle img").src = "img/lit-candle.png";
+    document.querySelector("#candle figcaption").textContent = "click to extinguish candle";
+  }
 }
 
 async function importEyes(choice) {

@@ -111,3 +111,14 @@ h2 {
   height: 100%;
   pointer-events: none;
 }
+
+#candle img {
+  width: min(12vw, 8rem);
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+#candle figcaption {
+  text-align: center;
+  margin-top: 0.5rem;
+}
