@@ -28,20 +28,22 @@
         <div id="pumpkin" class=""></div>
 
         <!-- Side navigation -->
-        <div class="sidenavigation">
-          <div id="categories">
-            <div>Eyes</div>
-            <div>Nose</div>
-            <div>Mouth</div>
-            <div>Background</div>
-            <div>Candle</div>
+        <div id="sidenavigation" class="sidenav">
+          <div id="categories" class="hidden">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+              >x</a
+            >
+            <a href="#">Eyes</a>
+            <a href="#">Nose</a>
+            <a href="#">Mouth</a>
+            <a href="#">Background</a>
+            <a href="#">Candle</a>
           </div>
-          <div id="options">
-            <div id="eyes" class="hidden"></div>
-            <div id="mouth" class="hidden"></div>
-            <div id="nose" class="hidden"></div>
-            <div id="background" class="hidden"></div>
-          </div>
+          <span onclick="openNav()">Eyes</span>
+          <span onclick="openNav()">Nose</span>
+          <span onclick="openNav()">Mouth</span>
+          <span onclick="openNav()">Background</span>
+          <span onclick="openNav()">Candle</span>
         </div>
       </div>
     </main>

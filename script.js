@@ -68,3 +68,15 @@ function setElementToPaint() {
 function removeStroke(area) {
   area.style.stroke = "none";
 }
+
+/* Set the width of the side navigation to 250px */
+function openNav() {
+  document.getElementById("sidenavigation").style.width = "250px";
+  document.querySelector("categories").remove.classList("hidden");
+}
+
+/* Set the width of the side navigation */
+function closeNav() {
+  document.getElementById("sidenavigation").style.width = "auto";
+  document.querySelector("categories").add.classList("hidden");
+}
