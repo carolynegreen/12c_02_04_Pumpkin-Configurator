@@ -20,7 +20,7 @@ async function start() {
   //there are 6 items in each SVG. We need to somehow divide them up and place them in a flex or grid inside the options menu.
   //if this isn't possible I can save each item individually, but it's a lot of files to import.
   //#eyes #mouth #nose
-
+  setMenuListeners();
   manipulateSVG();
 }
 
@@ -67,4 +67,20 @@ function setElementToPaint() {
 
 function removeStroke(area) {
   area.style.stroke = "none";
+}
+
+function setMenuListeners() {
+  console.log("hello");
+  document.querySelector("#categories div:nth-of-type(1)").addEventListener("click", toggleMenu);
+  document.querySelector("#categories div:nth-of-type(2)").addEventListener("click", toggleMenu);
+  document.querySelector("#categories div:nth-of-type(3)").addEventListener("click", toggleMenu);
+}
+
+function toggleMenu() {
+  document.querySelector("#nose").classList.add("hidden");
+  document.querySelector("#eyes").classList.add("hidden");
+  document.querySelector("#mouth").classList.add("hidden");
+
+  let idName = this.textContent.toLowerCase();
+  document.querySelector(`#${idName}`).classList.remove("hidden");
 }
