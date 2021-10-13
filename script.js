@@ -2,13 +2,13 @@
 window.addEventListener("DOMContentLoaded", start);
 
 let elementToPaint;
+let currentColor = "orange";
 const settings = {
   lit: true,
   mouth: 1,
   eyes: 1,
   nose: 1,
 };
-
 let stem;
 let sliceA;
 let sliceB;
@@ -28,14 +28,13 @@ async function start() {
   manipulateSVG();
 }
 
-let currentColor = "orange";
-console.log(currentColor);
-
 function setColor(part, colorFill) {
   part.style.fill = colorFill;
 }
 
 function manipulateSVG() {
+  console.log("manipulation");
+
   setColor(stem, currentColor);
   setColor(sliceA, currentColor);
   setColor(sliceB, currentColor);
@@ -57,7 +56,6 @@ function manipulateSVG() {
     });
   });
 
-  console.log("manipulation");
   // importEyes(2);
   selectPumpkinGroups();
   noClickOnShadows();
@@ -105,16 +103,6 @@ function removeStroke(area) {
 }
 
 function setMenuListeners() {
-  console.log("hello");
-  document
-    .querySelector("#categories div:nth-of-type(1)")
-    .addEventListener("click", toggleMenu);
-  document
-    .querySelector("#categories div:nth-of-type(2)")
-    .addEventListener("click", toggleMenu);
-  document
-    .querySelector("#categories div:nth-of-type(3)")
-    .addEventListener("click", toggleMenu);
   document
     .querySelector("#categories div:nth-of-type(1)")
     .addEventListener("click", toggleMenu);
@@ -156,6 +144,45 @@ function toggleMenu() {
   document.querySelector("#candle").classList.add("hidden");
 
   let idName = this.textContent.toLowerCase();
+
+  document
+    .querySelector("#categories div:nth-of-type(1)")
+    .classList.remove("selected");
+  document
+    .querySelector("#categories div:nth-of-type(2)")
+    .classList.remove("selected");
+  document
+    .querySelector("#categories div:nth-of-type(3)")
+    .classList.remove("selected");
+  document
+    .querySelector("#categories div:nth-of-type(4)")
+    .classList.remove("selected");
+  document
+    .querySelector("#categories div:nth-of-type(5)")
+    .classList.remove("selected");
+
+  if (this.textContent === "Eyes") {
+    document
+      .querySelector("#categories div:nth-of-type(1)")
+      .classList.add("selected");
+  } else if (this.textContent === "Nose") {
+    document
+      .querySelector("#categories div:nth-of-type(2)")
+      .classList.add("selected");
+  } else if (this.textContent === "Mouth") {
+    document
+      .querySelector("#categories div:nth-of-type(3)")
+      .classList.add("selected");
+  } else if (this.textContent === "Background") {
+    document
+      .querySelector("#categories div:nth-of-type(4)")
+      .classList.add("selected");
+  } else if (this.textContent === "Candle") {
+    document
+      .querySelector("#categories div:nth-of-type(5)")
+      .classList.add("selected");
+  }
+
   document.querySelector(`#${idName}`).classList.remove("hidden");
 }
 
@@ -164,14 +191,13 @@ function toggleLight() {
     console.log("turn off light");
     settings.lit = false;
     document.querySelector("#candle img").src = "img/unlit-candle.png";
-    document.querySelector("#candle figcaption").textContent =
-      "click to turn on candle";
+    document.querySelector("#candle figcaption").textContent = "light candle";
   } else {
     console.log("turn on light");
     settings.lit = true;
     document.querySelector("#candle img").src = "img/lit-candle.png";
     document.querySelector("#candle figcaption").textContent =
-      "click to extinguish candle";
+      "extinguish candle";
   }
 
   colorEye();
