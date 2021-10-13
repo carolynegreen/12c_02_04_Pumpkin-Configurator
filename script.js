@@ -9,6 +9,7 @@ const settings = {
   eyes: 1,
   nose: 1,
 };
+
 let stem;
 let sliceA;
 let sliceB;
@@ -35,27 +36,6 @@ function setColor(part, colorFill) {
 function manipulateSVG() {
   console.log("manipulation");
 
-  setColor(stem, currentColor);
-  setColor(sliceA, currentColor);
-  setColor(sliceB, currentColor);
-
-  stem.addEventListener("click", (event) => {
-    setColor(event.target, currentColor);
-  });
-  sliceA.addEventListener("click", (event) => {
-    setColor(event.target, currentColor);
-  });
-  sliceB.addEventListener("click", (event) => {
-    setColor(event.target, currentColor);
-  });
-
-  document.querySelectorAll("circle").forEach((element) => {
-    element.addEventListener("click", (event) => {
-      currentColor = event.target.style.fill;
-      console.log(element, currentColor);
-    });
-  });
-
   // importEyes(2);
   selectPumpkinGroups();
   noClickOnShadows();
@@ -66,6 +46,7 @@ function selectPumpkinGroups() {
   document.querySelector("#stem").classList.add("g_to_interact_with");
   document.querySelector("#slicesA").classList.add("g_to_interact_with");
   document.querySelector("#slicesB").classList.add("g_to_interact_with");
+  document.querySelectorAll(".g_to_interact_with").forEach(colorPumpkin);
 }
 
 function noClickOnShadows() {
@@ -96,6 +77,30 @@ function setElementToPaint() {
   elementToPaint.style.stroke = "orange";
   elementToPaint.style.strokeWidth = "25";
   elementToPaint.style.strokeDasharray = "100";
+}
+
+function colorPumpkin() {
+  setColor(stem, currentColor);
+  setColor(sliceA, currentColor);
+  setColor(sliceB, currentColor);
+
+  stem.addEventListener("click", (event) => {
+    setColor(event.target, currentColor);
+  });
+
+  sliceA.addEventListener("click", (event) => {
+    setColor(event.target, currentColor);
+  });
+  sliceB.addEventListener("click", (event) => {
+    setColor(event.target, currentColor);
+  });
+
+  document.querySelectorAll("circle").forEach((element) => {
+    element.addEventListener("click", (event) => {
+      currentColor = event.target.style.fill;
+      console.log(currentColor);
+    });
+  });
 }
 
 function removeStroke(area) {

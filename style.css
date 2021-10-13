@@ -37,7 +37,7 @@ h2 {
   height: auto;
 }
 
-#color1:hover {
+.colorbtn:hover {
   cursor: pointer;
 }
 
