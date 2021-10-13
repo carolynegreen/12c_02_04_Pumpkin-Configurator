@@ -24,7 +24,19 @@ async function start() {
   manipulateSVG();
 }
 
+let currentColor = "orange";
+
+function setColor(part, colorFill) {
+  part.style.fill = colorFill;
+}
+
 function manipulateSVG() {
+  setColor(elementToPaint, currentColor);
+
+  elementToPaint.addEventListener("click", (event) => {
+    setColor(event.target, currentColor);
+  });
+
   console.log("manipulation");
   selectPumpkinGroups();
   noClickOnShadows();
@@ -69,23 +81,17 @@ function removeStroke(area) {
   area.style.stroke = "none";
 }
 
-<<<<<<< HEAD
-/* Set the width of the side navigation to 250px */
-function openNav() {
-  document.getElementById("sidenavigation").style.width = "250px";
-  document.querySelector("categories").remove.classList("hidden");
-}
-
-/* Set the width of the side navigation */
-function closeNav() {
-  document.getElementById("sidenavigation").style.width = "auto";
-  document.querySelector("categories").add.classList("hidden");
-=======
 function setMenuListeners() {
   console.log("hello");
-  document.querySelector("#categories div:nth-of-type(1)").addEventListener("click", toggleMenu);
-  document.querySelector("#categories div:nth-of-type(2)").addEventListener("click", toggleMenu);
-  document.querySelector("#categories div:nth-of-type(3)").addEventListener("click", toggleMenu);
+  document
+    .querySelector("#categories div:nth-of-type(1)")
+    .addEventListener("click", toggleMenu);
+  document
+    .querySelector("#categories div:nth-of-type(2)")
+    .addEventListener("click", toggleMenu);
+  document
+    .querySelector("#categories div:nth-of-type(3)")
+    .addEventListener("click", toggleMenu);
 }
 
 function toggleMenu() {
@@ -95,5 +101,4 @@ function toggleMenu() {
 
   let idName = this.textContent.toLowerCase();
   document.querySelector(`#${idName}`).classList.remove("hidden");
->>>>>>> d6b053863966e6b277dc0e84352ed1471bf0188c
 }

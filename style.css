@@ -5,10 +5,6 @@
   --color-1: #ffa900;
 }
 
-body {
-  margin-left: 2vw;
-}
-
 header h1 {
   font-family: var(--font-1);
   font-size: 5vw;
@@ -17,9 +13,9 @@ header h1 {
 }
 
 h2 {
+  font-size: 2vw;
   text-align: center;
   color: white;
-  padding: 10px;
 }
 
 #container {
@@ -29,35 +25,21 @@ h2 {
 }
 
 #colors {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  width: 25%;
+  width: auto;
   background-color: var(--color-1);
   box-shadow: 3px 3px 1px #ff7600;
   border-radius: 12px;
-  padding-bottom: 12px;
-}
-
-.colorbtn {
-  background-color: yellow;
-  border-radius: 100%;
-  width: 4vw;
-  height: 4vw;
-  margin: 10px;
 }
 
 #pumpkin {
-  width: 80%;
+  width: 100%;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-.sidenav {
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  width: 50%;
+.sidenavigation {
+  width: 30%;
   background-color: var(--color-1);
   box-shadow: 3px 3px 1px #ff7600;
   border-radius: 12px;
@@ -66,19 +48,13 @@ h2 {
   grid-template-columns: 1fr 1fr;
 }
 
-.sidenav a {
-  text-decoration: none;
+#categories {
+  color: white;
   font-size: 20px;
   display: block;
   transition: 0.3s;
 }
 
-<<<<<<< HEAD
-.sidenav .closebtn {
-  position: fixed;
-  font-size: 36px;
-  margin-left: 28vw;
-=======
 #options {
   width: auto;
   background-color: white;
@@ -105,5 +81,4 @@ h2 {
 
 .hidden {
   display: none;
->>>>>>> d6b053863966e6b277dc0e84352ed1471bf0188c
 }

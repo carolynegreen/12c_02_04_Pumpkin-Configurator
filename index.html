@@ -16,15 +16,26 @@
       <div id="container" class="">
         <div id="colors">
           <h2>Choose a Color For Your Pumpkin</h2>
-          <div id="button1" class="colorbtn"></div>
-          <div id="button2" class="colorbtn"></div>
-          <div id="button3" class="colorbtn"></div>
-          <div id="button4" class="colorbtn"></div>
-          <div id="button5" class="colorbtn"></div>
-          <div id="button6" class="colorbtn"></div>
-          <div id="button7" class="colorbtn"></div>
-          <div id="button8" class="colorbtn"></div>
+          <svg class="palette">
+            <circle
+              id="color1"
+              class="colorbtn"
+              cx="90"
+              cy="40"
+              r="30"
+              fill="black"
+            ></circle>
+            <circle
+              id="color1"
+              class="white"
+              cx="210"
+              cy="40"
+              r="30"
+              fill="blue"
+            ></circle>
+          </svg>
         </div>
+
         <div id="pumpkin" class=""></div>
 
         <!-- Side navigation -->
@@ -99,11 +110,6 @@
             </div>
             <div id="background" class="hidden"></div>
           </div>
-          <span onclick="openNav()">Eyes</span>
-          <span onclick="openNav()">Nose</span>
-          <span onclick="openNav()">Mouth</span>
-          <span onclick="openNav()">Background</span>
-          <span onclick="openNav()">Candle</span>
         </div>
       </div>
     </main>
