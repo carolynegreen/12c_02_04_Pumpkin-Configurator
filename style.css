@@ -61,7 +61,7 @@ h2 {
   background-color: var(--color-1);
   box-shadow: 3px 3px 1px #ff7600;
   border-radius: 12px;
-  padding: 2vw;
+  padding: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -69,7 +69,15 @@ h2 {
 #categories div {
   font-size: 2vw;
   color: white;
-  margin-bottom: 4vh;
+  margin-top: 1rem;
+  cursor: pointer;
+  /* margin-right: 1rem; */
+  padding: 0.5rem 1rem;
+  border-radius: 12px 0 0 12px;
+}
+
+#categories div:hover {
+  background-color: hsla(28, 100%, 50%, 0.388);
 }
 
 #options {
@@ -114,8 +122,9 @@ h2 {
 
 .background {
   position: absolute;
-  background-size: cover;
-  background-position: center;
+  background-size: 100%;
+  background-position: top left;
+  background-repeat: no-repeat;
   top: 0;
   left: 0;
   bottom: 0;
@@ -124,16 +133,34 @@ h2 {
   z-index: -1;
 }
 
+#candle {
+  background-color: black;
+  width: 100%;
+  height: fit-content;
+  padding-bottom: 2rem;
+  border-radius: 12px;
+}
+
 #candle img,
 #background img {
   width: min(12vw, 8rem);
-  margin-top: 1rem;
+  margin: 1rem auto 0 auto;
   cursor: pointer;
   border-radius: 12px;
+  display: block;
 }
 
 #candle figcaption,
 #background figcaption {
   text-align: center;
   margin-top: 0.5rem;
+  color: grey;
+}
+
+figure {
+  margin: 2rem 1rem 1rem 1rem;
+}
+
+.selected {
+  background-color: #ff7600;
 }

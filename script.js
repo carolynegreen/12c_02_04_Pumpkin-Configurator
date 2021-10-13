@@ -90,6 +90,25 @@ function toggleMenu() {
   document.querySelector("#candle").classList.add("hidden");
 
   let idName = this.textContent.toLowerCase();
+
+  document.querySelector("#categories div:nth-of-type(1)").classList.remove("selected");
+  document.querySelector("#categories div:nth-of-type(2)").classList.remove("selected");
+  document.querySelector("#categories div:nth-of-type(3)").classList.remove("selected");
+  document.querySelector("#categories div:nth-of-type(4)").classList.remove("selected");
+  document.querySelector("#categories div:nth-of-type(5)").classList.remove("selected");
+
+  if (this.textContent === "Eyes") {
+    document.querySelector("#categories div:nth-of-type(1)").classList.add("selected");
+  } else if (this.textContent === "Nose") {
+    document.querySelector("#categories div:nth-of-type(2)").classList.add("selected");
+  } else if (this.textContent === "Mouth") {
+    document.querySelector("#categories div:nth-of-type(3)").classList.add("selected");
+  } else if (this.textContent === "Background") {
+    document.querySelector("#categories div:nth-of-type(4)").classList.add("selected");
+  } else if (this.textContent === "Candle") {
+    document.querySelector("#categories div:nth-of-type(5)").classList.add("selected");
+  }
+
   document.querySelector(`#${idName}`).classList.remove("hidden");
 }
 
@@ -98,12 +117,12 @@ function toggleLight() {
     console.log("turn off light");
     settings.lit = false;
     document.querySelector("#candle img").src = "img/unlit-candle.png";
-    document.querySelector("#candle figcaption").textContent = "click to turn on candle";
+    document.querySelector("#candle figcaption").textContent = "light candle";
   } else {
     console.log("turn on light");
     settings.lit = true;
     document.querySelector("#candle img").src = "img/lit-candle.png";
-    document.querySelector("#candle figcaption").textContent = "click to extinguish candle";
+    document.querySelector("#candle figcaption").textContent = "extinguish candle";
   }
 
   colorEye();
