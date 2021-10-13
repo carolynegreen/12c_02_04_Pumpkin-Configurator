@@ -29,6 +29,7 @@ async function start() {
 }
 
 let currentColor = "orange";
+console.log(currentColor);
 
 function setColor(part, colorFill) {
   part.style.fill = colorFill;
@@ -42,11 +43,17 @@ function manipulateSVG() {
   stem.addEventListener("click", (event) => {
     setColor(event.target, currentColor);
   });
+  sliceA.addEventListener("click", (event) => {
+    setColor(event.target, currentColor);
+  });
+  sliceB.addEventListener("click", (event) => {
+    setColor(event.target, currentColor);
+  });
 
   document.querySelectorAll("circle").forEach((element) => {
     element.addEventListener("click", (event) => {
       currentColor = event.target.style.fill;
-      console.log(currentColor);
+      console.log(element, currentColor);
     });
   });
 
