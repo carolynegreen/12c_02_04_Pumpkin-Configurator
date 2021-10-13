@@ -2,24 +2,20 @@
 window.addEventListener("DOMContentLoaded", start);
 
 let elementToPaint;
-// let svgCuttings;
+const settings = {
+  lit: true,
+  mouth: 1,
+  eyes: 1,
+  nose: 1,
+};
 
 async function start() {
   console.log("start");
+  //Importing the main picture
   let respPumpkin = await fetch("img/pumpkin.svg");
   let svgPumpkin = await respPumpkin.text();
   document.querySelector("#pumpkin").innerHTML = svgPumpkin;
 
-  let respMouths = await fetch("img/pumpkinMouths.svg");
-  let svgMouths = await respMouths.text();
-  let respEyes = await fetch("img/pumpkinEyes.svg");
-  let svgEyes = await respEyes.text();
-  let respNoses = await fetch("img/pumpkinNoses.svg");
-  let svgNoses = await respNoses.text();
-
-  //there are 6 items in each SVG. We need to somehow divide them up and place them in a flex or grid inside the options menu.
-  //if this isn't possible I can save each item individually, but it's a lot of files to import.
-  //#eyes #mouth #nose
   setMenuListeners();
   manipulateSVG();
 }
@@ -38,6 +34,7 @@ function manipulateSVG() {
   });
 
   console.log("manipulation");
+  // importEyes(2);
   selectPumpkinGroups();
   noClickOnShadows();
   document.querySelectorAll(".g_to_interact_with").forEach(prepareArea);
@@ -52,6 +49,7 @@ function selectPumpkinGroups() {
 function noClickOnShadows() {
   console.log("noClickOnShadows");
   document.querySelector("#new_shadow_Image").style.pointerEvents = "none";
+  document.querySelector("#new_shadow_Image").style.zIndex = "20";
 }
 
 function prepareArea(area) {
@@ -66,6 +64,7 @@ function prepareArea(area) {
   function removeFill(path) {
     path.removeAttribute("fill");
   }
+  area.style.zIndex = "20";
   area.addEventListener("click", setElementToPaint);
 }
 
@@ -92,13 +91,219 @@ function setMenuListeners() {
   document
     .querySelector("#categories div:nth-of-type(3)")
     .addEventListener("click", toggleMenu);
+  document
+    .querySelector("#categories div:nth-of-type(1)")
+    .addEventListener("click", toggleMenu);
+  document
+    .querySelector("#categories div:nth-of-type(2)")
+    .addEventListener("click", toggleMenu);
+  document
+    .querySelector("#categories div:nth-of-type(3)")
+    .addEventListener("click", toggleMenu);
+  document
+    .querySelector("#categories div:nth-of-type(4)")
+    .addEventListener("click", toggleMenu);
+  document
+    .querySelector("#categories div:nth-of-type(5)")
+    .addEventListener("click", toggleMenu);
+  document
+    .querySelectorAll("#options #eyes .option")
+    .forEach((option) => option.addEventListener("click", setEyes));
+  document
+    .querySelectorAll("#options #nose .option")
+    .forEach((option) => option.addEventListener("click", setNose));
+  document
+    .querySelectorAll("#options #mouth .option")
+    .forEach((option) => option.addEventListener("click", setMouth));
+  document.querySelector("#candle img").addEventListener("click", toggleLight);
+  document
+    .querySelector("#candle figcaption")
+    .addEventListener("click", toggleLight);
+  document
+    .querySelectorAll("#background figure")
+    .forEach((option) => option.addEventListener("click", toggleBackground));
 }
 
 function toggleMenu() {
   document.querySelector("#nose").classList.add("hidden");
   document.querySelector("#eyes").classList.add("hidden");
   document.querySelector("#mouth").classList.add("hidden");
+  document.querySelector("#background").classList.add("hidden");
+  document.querySelector("#candle").classList.add("hidden");
 
   let idName = this.textContent.toLowerCase();
   document.querySelector(`#${idName}`).classList.remove("hidden");
+}
+
+function toggleLight() {
+  if (settings.lit === true) {
+    console.log("turn off light");
+    settings.lit = false;
+    document.querySelector("#candle img").src = "img/unlit-candle.png";
+    document.querySelector("#candle figcaption").textContent =
+      "click to turn on candle";
+  } else {
+    console.log("turn on light");
+    settings.lit = true;
+    document.querySelector("#candle img").src = "img/lit-candle.png";
+    document.querySelector("#candle figcaption").textContent =
+      "click to extinguish candle";
+  }
+
+  colorEye();
+  colorMouth();
+  colorNose();
+}
+
+function setEyes(choice) {
+  choice = choice.path[0].attributes[2].value;
+  settings.eyes = choice;
+  importEyes();
+}
+
+async function importEyes() {
+  // console.log(choice.path[0].attributes[2].value);
+  // choice = choice.path[0].attributes[2].value;
+  // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
+  let respEye = await fetch(`img/eye${settings.eyes}.svg`);
+  let svgEye = await respEye.text();
+  document.querySelector("#pumpkin-container .eye").innerHTML = svgEye;
+  colorEye();
+}
+
+function colorEye() {
+  if (settings.lit === true) {
+    document
+      .querySelectorAll(`#eyes${settings.eyes} path`)
+      .forEach(colorElementOrange);
+    document
+      .querySelectorAll(`#eyes${settings.eyes} #shell path`)
+      .forEach(colorElementBrown);
+    function colorElementOrange(area) {
+      area.style.fill = "#f9b332";
+    }
+    function colorElementBrown(area) {
+      area.style.fill = "#b07e4a";
+    }
+  } else {
+    document
+      .querySelectorAll(`#eyes${settings.eyes} path`)
+      .forEach(colorElementBlack);
+    document
+      .querySelectorAll(`#eyes${settings.eyes} #shell path`)
+      .forEach(colorElementBrown);
+    function colorElementBrown(area) {
+      area.style.fill = "#432918";
+    }
+    function colorElementBlack(area) {
+      area.style.fill = "black";
+    }
+  }
+}
+
+function setNose(choice) {
+  choice = choice.path[0].attributes[2].value;
+  settings.nose = choice;
+  importNose();
+}
+
+async function importNose() {
+  // console.log(choice.path[0].attributes[2].value);
+  // choice = choice.path[0].attributes[2].value;
+  // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
+  let respNose = await fetch(`img/nose${settings.nose}.svg`);
+  let svgNose = await respNose.text();
+  document.querySelector("#pumpkin-container .nose").innerHTML = svgNose;
+  colorNose();
+}
+
+function colorNose() {
+  if (settings.lit === true) {
+    document
+      .querySelectorAll(`#nose${settings.nose} path`)
+      .forEach(colorElementOrange);
+    document
+      .querySelectorAll(`#nose${settings.nose} #shell`)
+      .forEach(colorElementBrown);
+    document
+      .querySelectorAll(`#nose${settings.nose} #shell path`)
+      .forEach(colorElementBrown);
+    function colorElementOrange(area) {
+      area.style.fill = "#f9b332";
+    }
+    function colorElementBrown(area) {
+      area.style.fill = "#b07e4a";
+    }
+  } else {
+    document
+      .querySelectorAll(`#nose${settings.nose} path`)
+      .forEach(colorElementBlack);
+    document
+      .querySelectorAll(`#nose${settings.nose} #shell`)
+      .forEach(colorElementBrown);
+    document
+      .querySelectorAll(`#nose${settings.nose} #shell path`)
+      .forEach(colorElementBrown);
+    function colorElementBrown(area) {
+      area.style.fill = "#432918";
+    }
+    function colorElementBlack(area) {
+      area.style.fill = "black";
+    }
+  }
+}
+
+function setMouth(choice) {
+  choice = choice.path[0].attributes[2].value;
+  settings.mouth = choice;
+  importMouth();
+}
+
+async function importMouth() {
+  // console.log(choice.path[0].attributes[2].value);
+  // choice = choice.path[0].attributes[2].value;
+  // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
+  let respMouth = await fetch(`img/mouth${settings.mouth}.svg`);
+  let svgMouth = await respMouth.text();
+  document.querySelector("#pumpkin-container .mouth").innerHTML = svgMouth;
+
+  colorMouth();
+}
+
+function colorMouth() {
+  if (settings.lit === true) {
+    document
+      .querySelectorAll(`#mouth${settings.mouth} path`)
+      .forEach(colorElementOrange);
+    document
+      .querySelectorAll(`#mouth${settings.mouth} #shell path`)
+      .forEach(colorElementBrown);
+    function colorElementOrange(area) {
+      area.style.fill = "#f9b332";
+    }
+    function colorElementBrown(area) {
+      area.style.fill = "#b07e4a";
+    }
+  } else {
+    document
+      .querySelectorAll(`#mouth${settings.mouth} path`)
+      .forEach(colorElementBlack);
+    document
+      .querySelectorAll(`#mouth${settings.mouth} #shell path`)
+      .forEach(colorElementBrown);
+    function colorElementBrown(area) {
+      area.style.fill = "#432918";
+    }
+    function colorElementBlack(area) {
+      area.style.fill = "black";
+    }
+  }
+}
+
+function toggleBackground() {
+  console.log("toggle background");
+  // document.querySelector("#pumpkin-container .background").backgroundImage.src = `"url('${this.dataset.feature}')"`;
+  document.querySelector(
+    "#pumpkin-container .background"
+  ).style.backgroundImage = "url('" + this.dataset.feature + "')";
 }
