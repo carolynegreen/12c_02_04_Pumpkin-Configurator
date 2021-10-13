@@ -9,12 +9,20 @@ const settings = {
   nose: 1,
 };
 
+let stem;
+let sliceA;
+let sliceB;
+
 async function start() {
   console.log("start");
   //Importing the main picture
   let respPumpkin = await fetch("img/pumpkin.svg");
   let svgPumpkin = await respPumpkin.text();
   document.querySelector("#pumpkin").innerHTML = svgPumpkin;
+
+  stem = document.querySelector("#stem");
+  sliceA = document.querySelector("#slicesA");
+  sliceB = document.querySelector("#slicesB");
 
   setMenuListeners();
   manipulateSVG();
@@ -27,10 +35,19 @@ function setColor(part, colorFill) {
 }
 
 function manipulateSVG() {
-  setColor(elementToPaint, currentColor);
+  setColor(stem, currentColor);
+  setColor(sliceA, currentColor);
+  setColor(sliceB, currentColor);
 
-  elementToPaint.addEventListener("click", (event) => {
+  stem.addEventListener("click", (event) => {
     setColor(event.target, currentColor);
+  });
+
+  document.querySelectorAll("circle").forEach((element) => {
+    element.addEventListener("click", (event) => {
+      currentColor = event.target.style.fill;
+      console.log(currentColor);
+    });
   });
 
   console.log("manipulation");
