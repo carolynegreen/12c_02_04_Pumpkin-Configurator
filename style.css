@@ -5,6 +5,10 @@
   --color-1: #ffa900;
 }
 
+body {
+  margin-left: 2vw;
+}
+
 header h1 {
   font-family: var(--font-1);
   font-size: 5vw;
@@ -13,9 +17,9 @@ header h1 {
 }
 
 h2 {
-  font-size: 2vw;
   text-align: center;
   color: white;
+  padding: 10px;
 }
 
 #container {
@@ -48,7 +52,7 @@ h2 {
 }
 
 .sidenavigation {
-  width: 30%;
+  width: 50%;
   background-color: var(--color-1);
   box-shadow: 3px 3px 1px #ff7600;
   border-radius: 12px;
@@ -57,7 +61,8 @@ h2 {
   grid-template-columns: 1fr 1fr;
 }
 
-#categories {
+#categories div {
+  font-size: 2vw;
   color: white;
   margin-top: 1rem;
   cursor: pointer;

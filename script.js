@@ -13,10 +13,6 @@ let stem;
 let sliceA;
 let sliceB;
 
-let stem;
-let sliceA;
-let sliceB;
-
 async function start() {
   console.log("start");
   //Importing the main picture
@@ -37,21 +33,6 @@ function setColor(part, colorFill) {
 }
 
 function manipulateSVG() {
-  setColor(stem, currentColor);
-  setColor(sliceA, currentColor);
-  setColor(sliceB, currentColor);
-
-  stem.addEventListener("click", (event) => {
-    setColor(event.target, currentColor);
-  });
-
-  document.querySelectorAll("circle").forEach((element) => {
-    element.addEventListener("click", (event) => {
-      currentColor = event.target.style.fill;
-      console.log(currentColor);
-    });
-  });
-
   console.log("manipulation");
 
   setColor(stem, currentColor);
@@ -65,7 +46,6 @@ function manipulateSVG() {
   document.querySelectorAll("circle").forEach((element) => {
     element.addEventListener("click", (event) => {
       currentColor = event.target.style.fill;
-      console.log(event.target);
       console.log(currentColor);
     });
   });
@@ -117,10 +97,6 @@ function removeStroke(area) {
 }
 
 function setMenuListeners() {
-  console.log("hello");
-  document.querySelector("#categories div:nth-of-type(1)").addEventListener("click", toggleMenu);
-  document.querySelector("#categories div:nth-of-type(2)").addEventListener("click", toggleMenu);
-  document.querySelector("#categories div:nth-of-type(3)").addEventListener("click", toggleMenu);
   document.querySelector("#categories div:nth-of-type(1)").addEventListener("click", toggleMenu);
   document.querySelector("#categories div:nth-of-type(2)").addEventListener("click", toggleMenu);
   document.querySelector("#categories div:nth-of-type(3)").addEventListener("click", toggleMenu);
