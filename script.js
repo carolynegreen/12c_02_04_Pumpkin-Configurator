@@ -2,12 +2,16 @@
 window.addEventListener("DOMContentLoaded", start);
 
 let elementToPaint;
+let currentColor = "orange";
 const settings = {
   lit: true,
   mouth: 1,
   eyes: 1,
   nose: 1,
 };
+let stem;
+let sliceA;
+let sliceB;
 
 async function start() {
   console.log("start");
@@ -16,12 +20,37 @@ async function start() {
   let svgPumpkin = await respPumpkin.text();
   document.querySelector("#pumpkin").innerHTML = svgPumpkin;
 
+  stem = document.querySelector("#stem");
+  sliceA = document.querySelector("#slicesA");
+  sliceB = document.querySelector("#slicesB");
+
   setMenuListeners();
   manipulateSVG();
 }
 
+function setColor(part, colorFill) {
+  part.style.fill = colorFill;
+}
+
 function manipulateSVG() {
   console.log("manipulation");
+
+  setColor(stem, currentColor);
+  setColor(sliceA, currentColor);
+  setColor(sliceB, currentColor);
+
+  stem.addEventListener("click", (event) => {
+    setColor(event.target, currentColor);
+  });
+
+  document.querySelectorAll("circle").forEach((element) => {
+    element.addEventListener("click", (event) => {
+      currentColor = event.target.style.fill;
+      console.log(event.target);
+      console.log(currentColor);
+    });
+  });
+
   // importEyes(2);
   selectPumpkinGroups();
   noClickOnShadows();

@@ -29,22 +29,17 @@ h2 {
 }
 
 #colors {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  width: 25%;
+  width: auto;
   background-color: var(--color-1);
   box-shadow: 3px 3px 1px #ff7600;
   border-radius: 12px;
-  padding-bottom: 12px;
+  height: auto;
 }
 
-.colorbtn {
-  background-color: yellow;
-  border-radius: 100%;
-  width: 4vw;
-  height: 4vw;
-  margin: 10px;
+.colorbtn:hover {
+  cursor: pointer;
+  color: yellow;
 }
 
 #pumpkin-container {
