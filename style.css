@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
 
 :root {
   --font-1: "Creepster", cursive;
@@ -6,62 +7,75 @@
 }
 
 body {
-  margin-left: 2vw;
+  margin: 0 2vw;
+  font-family: "Quicksand", sans-serif;
 }
 
 header h1 {
   font-family: var(--font-1);
-  font-size: 5vw;
+  font-size: min(6vh, 6vw);
   letter-spacing: 0.5vw;
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 h2 {
   text-align: center;
   color: white;
   padding: 10px;
+  font-size: min(1.5rem, 1.4vw);
+  font-weight: 600;
 }
 
 #container {
+  margin: none;
   display: flex;
   flex-direction: row;
   gap: 1vw;
+  justify-content: center;
 }
 
 #colors {
   justify-content: center;
-  width: auto;
+  width: min(30%, calc(70vh - 15rem));
   background-color: var(--color-1);
   box-shadow: 3px 3px 1px #ff7600;
   border-radius: 12px;
-  height: auto;
+  height: calc(100vh - 7rem - 6vh);
 }
 
 .colorbtn:hover {
   cursor: pointer;
 }
 
-#pumpkin-container {
-  position: relative;
-  width: 80%;
+#pumpkin {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#pumpkin {
-  z-index: 2;
+#pumpkin-container {
+  position: relative;
+  width: min(80%, calc(100vh - 7rem - 6vh));
+  height: min(80%, calc(100vh - 7rem - 6vh));
+  box-shadow: 3px 3px 1px #ff7600;
+  border-radius: 12px;
 }
 
 .sidenavigation {
-  width: 50%;
+  width: min(50%, calc(70vh - 10rem));
   background-color: var(--color-1);
   box-shadow: 3px 3px 1px #ff7600;
   border-radius: 12px;
   padding: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  /* height: fit-content; */
+  /* height: min(80%, calc(100vh - 7rem - 6vh)); */
 }
 
 #categories div {
-  font-size: 2vw;
+  font-size: min(1.5rem, 1.4vw);
   color: white;
   margin-top: 1rem;
   cursor: pointer;
@@ -76,11 +90,14 @@ h2 {
 
 #options {
   width: auto;
+  /* height: calc(100vh - 9rem - 6vh); */
   background-color: white;
   display: flex;
   justify-content: center;
-  padding: 0 1rem;
+  padding: 1rem;
   border-radius: 12px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .option {
@@ -90,7 +107,7 @@ h2 {
 
 .option img {
   width: min(12vw, 8rem);
-  margin-top: 1rem;
+  margin: 0.5rem 0.3rem;
   cursor: pointer;
 }
 
@@ -109,7 +126,6 @@ h2 {
   bottom: 0;
   right: 0;
   width: 100%;
-  height: 40vw;
   pointer-events: none;
   z-index: 3;
 }
@@ -117,14 +133,16 @@ h2 {
 .background {
   position: absolute;
   background-size: 100%;
-  background-position: top left;
-  background-repeat: no-repeat;
+  background-position: top;
+  background-repeat: round;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   pointer-events: none;
   z-index: -1;
+  background-color: #ffa900;
+  border-radius: 12px;
 }
 
 #candle {
@@ -137,7 +155,7 @@ h2 {
 
 #candle img,
 #background img {
-  width: min(12vw, 8rem);
+  width: min(12vw, 6rem);
   margin: 1rem auto 0 auto;
   cursor: pointer;
   border-radius: 12px;
@@ -148,6 +166,11 @@ h2 {
 #background figcaption {
   text-align: center;
   margin-top: 0.5rem;
+  color: white;
+  font-size: min(1rem, 1vw);
+}
+
+#background figcaption {
   color: grey;
 }
 
@@ -157,4 +180,17 @@ figure {
 
 .selected {
   background-color: #ff7600;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+footer {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }

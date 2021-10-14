@@ -1,5 +1,6 @@
 "use strict";
 window.addEventListener("DOMContentLoaded", start);
+window.addEventListener("resize", setHeight);
 
 let elementToPaint;
 let currentColor = "orange";
@@ -16,6 +17,7 @@ let sliceB;
 
 async function start() {
   console.log("start");
+
   //Importing the main picture
   let respPumpkin = await fetch("img/pumpkin.svg");
   let svgPumpkin = await respPumpkin.text();
@@ -24,7 +26,7 @@ async function start() {
   stem = document.querySelector("#stem");
   sliceA = document.querySelector("#slicesA");
   sliceB = document.querySelector("#slicesB");
-
+  setHeight();
   setMenuListeners();
   manipulateSVG();
 }
@@ -108,37 +110,17 @@ function removeStroke(area) {
 }
 
 function setMenuListeners() {
-  document
-    .querySelector("#categories div:nth-of-type(1)")
-    .addEventListener("click", toggleMenu);
-  document
-    .querySelector("#categories div:nth-of-type(2)")
-    .addEventListener("click", toggleMenu);
-  document
-    .querySelector("#categories div:nth-of-type(3)")
-    .addEventListener("click", toggleMenu);
-  document
-    .querySelector("#categories div:nth-of-type(4)")
-    .addEventListener("click", toggleMenu);
-  document
-    .querySelector("#categories div:nth-of-type(5)")
-    .addEventListener("click", toggleMenu);
-  document
-    .querySelectorAll("#options #eyes .option")
-    .forEach((option) => option.addEventListener("click", setEyes));
-  document
-    .querySelectorAll("#options #nose .option")
-    .forEach((option) => option.addEventListener("click", setNose));
-  document
-    .querySelectorAll("#options #mouth .option")
-    .forEach((option) => option.addEventListener("click", setMouth));
+  document.querySelector("#categories div:nth-of-type(1)").addEventListener("click", toggleMenu);
+  document.querySelector("#categories div:nth-of-type(2)").addEventListener("click", toggleMenu);
+  document.querySelector("#categories div:nth-of-type(3)").addEventListener("click", toggleMenu);
+  document.querySelector("#categories div:nth-of-type(4)").addEventListener("click", toggleMenu);
+  document.querySelector("#categories div:nth-of-type(5)").addEventListener("click", toggleMenu);
+  document.querySelectorAll("#options #eyes .option").forEach((option) => option.addEventListener("click", setEyes));
+  document.querySelectorAll("#options #nose .option").forEach((option) => option.addEventListener("click", setNose));
+  document.querySelectorAll("#options #mouth .option").forEach((option) => option.addEventListener("click", setMouth));
   document.querySelector("#candle img").addEventListener("click", toggleLight);
-  document
-    .querySelector("#candle figcaption")
-    .addEventListener("click", toggleLight);
-  document
-    .querySelectorAll("#background figure")
-    .forEach((option) => option.addEventListener("click", toggleBackground));
+  document.querySelector("#candle figcaption").addEventListener("click", toggleLight);
+  document.querySelectorAll("#background figure").forEach((option) => option.addEventListener("click", toggleBackground));
 }
 
 function toggleMenu() {
@@ -150,42 +132,22 @@ function toggleMenu() {
 
   let idName = this.textContent.toLowerCase();
 
-  document
-    .querySelector("#categories div:nth-of-type(1)")
-    .classList.remove("selected");
-  document
-    .querySelector("#categories div:nth-of-type(2)")
-    .classList.remove("selected");
-  document
-    .querySelector("#categories div:nth-of-type(3)")
-    .classList.remove("selected");
-  document
-    .querySelector("#categories div:nth-of-type(4)")
-    .classList.remove("selected");
-  document
-    .querySelector("#categories div:nth-of-type(5)")
-    .classList.remove("selected");
+  document.querySelector("#categories div:nth-of-type(1)").classList.remove("selected");
+  document.querySelector("#categories div:nth-of-type(2)").classList.remove("selected");
+  document.querySelector("#categories div:nth-of-type(3)").classList.remove("selected");
+  document.querySelector("#categories div:nth-of-type(4)").classList.remove("selected");
+  document.querySelector("#categories div:nth-of-type(5)").classList.remove("selected");
 
   if (this.textContent === "Eyes") {
-    document
-      .querySelector("#categories div:nth-of-type(1)")
-      .classList.add("selected");
+    document.querySelector("#categories div:nth-of-type(1)").classList.add("selected");
   } else if (this.textContent === "Nose") {
-    document
-      .querySelector("#categories div:nth-of-type(2)")
-      .classList.add("selected");
+    document.querySelector("#categories div:nth-of-type(2)").classList.add("selected");
   } else if (this.textContent === "Mouth") {
-    document
-      .querySelector("#categories div:nth-of-type(3)")
-      .classList.add("selected");
+    document.querySelector("#categories div:nth-of-type(3)").classList.add("selected");
   } else if (this.textContent === "Background") {
-    document
-      .querySelector("#categories div:nth-of-type(4)")
-      .classList.add("selected");
+    document.querySelector("#categories div:nth-of-type(4)").classList.add("selected");
   } else if (this.textContent === "Candle") {
-    document
-      .querySelector("#categories div:nth-of-type(5)")
-      .classList.add("selected");
+    document.querySelector("#categories div:nth-of-type(5)").classList.add("selected");
   }
 
   document.querySelector(`#${idName}`).classList.remove("hidden");
@@ -201,8 +163,7 @@ function toggleLight() {
     console.log("turn on light");
     settings.lit = true;
     document.querySelector("#candle img").src = "img/lit-candle.png";
-    document.querySelector("#candle figcaption").textContent =
-      "extinguish candle";
+    document.querySelector("#candle figcaption").textContent = "extinguish candle";
   }
 
   colorEye();
@@ -230,12 +191,8 @@ async function importEyes() {
 
 function colorEye() {
   if (settings.lit === true) {
-    document
-      .querySelectorAll(`#eyes${settings.eyes} path`)
-      .forEach(colorElementOrange);
-    document
-      .querySelectorAll(`#eyes${settings.eyes} #shell path`)
-      .forEach(colorElementBrown);
+    document.querySelectorAll(`#eyes${settings.eyes} path`).forEach(colorElementOrange);
+    document.querySelectorAll(`#eyes${settings.eyes} #shell path`).forEach(colorElementBrown);
     function colorElementOrange(area) {
       area.style.fill = "#f9b332";
     }
@@ -243,12 +200,8 @@ function colorEye() {
       area.style.fill = "#b07e4a";
     }
   } else {
-    document
-      .querySelectorAll(`#eyes${settings.eyes} path`)
-      .forEach(colorElementBlack);
-    document
-      .querySelectorAll(`#eyes${settings.eyes} #shell path`)
-      .forEach(colorElementBrown);
+    document.querySelectorAll(`#eyes${settings.eyes} path`).forEach(colorElementBlack);
+    document.querySelectorAll(`#eyes${settings.eyes} #shell path`).forEach(colorElementBrown);
     function colorElementBrown(area) {
       area.style.fill = "#432918";
     }
@@ -278,15 +231,9 @@ async function importNose() {
 
 function colorNose() {
   if (settings.lit === true) {
-    document
-      .querySelectorAll(`#nose${settings.nose} path`)
-      .forEach(colorElementOrange);
-    document
-      .querySelectorAll(`#nose${settings.nose} #shell`)
-      .forEach(colorElementBrown);
-    document
-      .querySelectorAll(`#nose${settings.nose} #shell path`)
-      .forEach(colorElementBrown);
+    document.querySelectorAll(`#nose${settings.nose} path`).forEach(colorElementOrange);
+    document.querySelectorAll(`#nose${settings.nose} #shell`).forEach(colorElementBrown);
+    document.querySelectorAll(`#nose${settings.nose} #shell path`).forEach(colorElementBrown);
     function colorElementOrange(area) {
       area.style.fill = "#f9b332";
     }
@@ -294,15 +241,9 @@ function colorNose() {
       area.style.fill = "#b07e4a";
     }
   } else {
-    document
-      .querySelectorAll(`#nose${settings.nose} path`)
-      .forEach(colorElementBlack);
-    document
-      .querySelectorAll(`#nose${settings.nose} #shell`)
-      .forEach(colorElementBrown);
-    document
-      .querySelectorAll(`#nose${settings.nose} #shell path`)
-      .forEach(colorElementBrown);
+    document.querySelectorAll(`#nose${settings.nose} path`).forEach(colorElementBlack);
+    document.querySelectorAll(`#nose${settings.nose} #shell`).forEach(colorElementBrown);
+    document.querySelectorAll(`#nose${settings.nose} #shell path`).forEach(colorElementBrown);
     function colorElementBrown(area) {
       area.style.fill = "#432918";
     }
@@ -333,12 +274,8 @@ async function importMouth() {
 
 function colorMouth() {
   if (settings.lit === true) {
-    document
-      .querySelectorAll(`#mouth${settings.mouth} path`)
-      .forEach(colorElementOrange);
-    document
-      .querySelectorAll(`#mouth${settings.mouth} #shell path`)
-      .forEach(colorElementBrown);
+    document.querySelectorAll(`#mouth${settings.mouth} path`).forEach(colorElementOrange);
+    document.querySelectorAll(`#mouth${settings.mouth} #shell path`).forEach(colorElementBrown);
     function colorElementOrange(area) {
       area.style.fill = "#f9b332";
     }
@@ -346,12 +283,8 @@ function colorMouth() {
       area.style.fill = "#b07e4a";
     }
   } else {
-    document
-      .querySelectorAll(`#mouth${settings.mouth} path`)
-      .forEach(colorElementBlack);
-    document
-      .querySelectorAll(`#mouth${settings.mouth} #shell path`)
-      .forEach(colorElementBrown);
+    document.querySelectorAll(`#mouth${settings.mouth} path`).forEach(colorElementBlack);
+    document.querySelectorAll(`#mouth${settings.mouth} #shell path`).forEach(colorElementBrown);
     function colorElementBrown(area) {
       area.style.fill = "#432918";
     }
@@ -364,9 +297,7 @@ function colorMouth() {
 function toggleBackground() {
   console.log("toggle background");
   // document.querySelector("#pumpkin-container .background").backgroundImage.src = `"url('${this.dataset.feature}')"`;
-  document.querySelector(
-    "#pumpkin-container .background"
-  ).style.backgroundImage = "url('" + this.dataset.feature + "')";
+  document.querySelector("#pumpkin-container .background").style.backgroundImage = "url('" + this.dataset.feature + "')";
 }
 
 function animate(type) {
@@ -396,4 +327,11 @@ function animate(type) {
   animation.onfinish = () => {
     animation.cancel();
   };
+}
+
+function setHeight() {
+  let height = document.querySelector("#pumpkin").offsetHeight;
+  document.querySelector(".sidenavigation").style.height = `${height - 33}px`;
+  document.querySelector("#colors").style.height = `${height}px`;
+  // document.querySelector("#options").style.height = `${height - 50}px`;
 }
