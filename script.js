@@ -47,6 +47,7 @@ function selectPumpkinGroups() {
   document.querySelector("#slicesA").classList.add("g_to_interact_with");
   document.querySelector("#slicesB").classList.add("g_to_interact_with");
   document.querySelectorAll(".g_to_interact_with").forEach(colorPumpkin);
+  colorPumpkin();
 }
 
 function noClickOnShadows() {
