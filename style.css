@@ -256,3 +256,16 @@ a {
   text-decoration: none;
   color: black;
 }
+
+path:hover {
+  stroke: black;
+  stroke-width: 25px;
+  stroke-dasharray: 50;
+  animation: dashedLine 1s infinite linear;
+}
+
+@keyframes dashedLine {
+  to {
+    stroke-dashoffset: 100;
+  }
+}
