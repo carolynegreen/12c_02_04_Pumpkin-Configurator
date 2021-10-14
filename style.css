@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap");
+
 :root {
   --font-1: "Chelsea Market", cursive;
   --font-2: "Quicksand", sans-serif;
@@ -19,7 +20,7 @@ body {
 header {
   margin-top: 20px;
   margin-bottom: 50px;
-  line-height: 0.9vh;
+  line-height: 40px;
 }
 
 h1 {
@@ -27,6 +28,7 @@ h1 {
   color: black;
   font-size: 4vw;
   text-align: center;
+  margin: 0 2vw;
 }
 
 h3 {
@@ -47,21 +49,25 @@ h2 {
   text-align: center;
   color: white;
   padding: 10px;
+  font-size: min(1.5rem, 1.4vw);
+  font-weight: 600;
 }
 
 #container {
+  margin: none;
   display: flex;
   flex-direction: row;
   gap: 1vw;
+  justify-content: center;
 }
 
 #colors {
   justify-content: center;
-  width: auto;
+  width: min(30%, calc(70vh - 15rem));
   background-color: var(--color-1);
   box-shadow: 3px 3px 1px #ff7600;
   border-radius: 12px;
-  height: auto;
+  height: calc(100vh - 7rem - 6vh);
 }
 
 .colorbtn:hover {
@@ -75,10 +81,11 @@ button {
   color: white;
   border: none;
   border-radius: 3px;
-  width: 9vw;
+  width: 8vw;
   height: auto;
   padding: 10px;
-  margin: 5vw;
+  margin-left: 4em;
+  margin-top: 2em;
 }
 
 button:hover {
@@ -91,22 +98,35 @@ button:hover {
 }
 
 #pumpkin {
-  z-index: 2;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#pumpkin-container {
+  position: relative;
+  width: min(80%, calc(100vh - 7rem - 6vh));
+  height: min(80%, calc(100vh - 7rem - 6vh));
+  box-shadow: 3px 3px 1px #ff7600;
+  border-radius: 12px;
 }
 
 .sidenavigation {
-  width: 50%;
+  width: min(50%, calc(70vh - 10rem));
   background-color: var(--color-1);
   box-shadow: 3px 3px 1px #ff7600;
   border-radius: 12px;
   padding: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  /* height: fit-content; */
+  /* height: min(80%, calc(100vh - 7rem - 6vh)); */
 }
 
 #categories div {
   font-family: var(--font-2);
   font-size: 1.4vw;
+  font-size: min(1.5rem, 1.4vw);
   color: white;
   margin-top: 1rem;
   cursor: pointer;
@@ -121,11 +141,14 @@ button:hover {
 
 #options {
   width: auto;
+  /* height: calc(100vh - 9rem - 6vh); */
   background-color: white;
   display: flex;
   justify-content: center;
-  padding: 0 1rem;
+  padding: 1rem;
   border-radius: 12px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .option {
@@ -135,7 +158,7 @@ button:hover {
 
 .option img {
   width: min(12vw, 8rem);
-  margin-top: 1rem;
+  margin: 0.5rem 0.3rem;
   cursor: pointer;
 }
 
@@ -154,7 +177,6 @@ button:hover {
   bottom: 0;
   right: 0;
   width: 100%;
-  height: 40vw;
   pointer-events: none;
   z-index: 3;
 }
@@ -162,14 +184,16 @@ button:hover {
 .background {
   position: absolute;
   background-size: 100%;
-  background-position: top left;
-  background-repeat: no-repeat;
+  background-position: top;
+  background-repeat: round;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   pointer-events: none;
   z-index: -1;
+  background-color: #ffa900;
+  border-radius: 12px;
 }
 
 #candle {
@@ -182,7 +206,7 @@ button:hover {
 
 #candle img,
 #background img {
-  width: min(12vw, 8rem);
+  width: min(12vw, 6rem);
   margin: 1rem auto 0 auto;
   cursor: pointer;
   border-radius: 12px;
@@ -193,6 +217,11 @@ button:hover {
 #background figcaption {
   text-align: center;
   margin-top: 0.5rem;
+  color: white;
+  font-size: min(1rem, 1vw);
+}
+
+#background figcaption {
   color: grey;
 }
 
@@ -213,4 +242,17 @@ footer {
   font-size: 12px;
   margin-top: 1.2vw;
   padding: 1%;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+footer {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }

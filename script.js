@@ -1,5 +1,6 @@
 "use strict";
 window.addEventListener("DOMContentLoaded", start);
+window.addEventListener("resize", setHeight);
 
 let elementToPaint;
 let currentColor = "";
@@ -30,6 +31,7 @@ async function start() {
   //botton reset click
   document.querySelector("#reset").addEventListener("click", resetColors);
 
+  setHeight();
   setMenuListeners();
   manipulateSVG();
 }
@@ -422,4 +424,11 @@ function resetColors() {
   Array.from(sliceB.children).forEach((child) => {
     setColor(child, resetColor);
   });
+}
+
+function setHeight() {
+  let height = document.querySelector("#pumpkin").offsetHeight;
+  document.querySelector(".sidenavigation").style.height = `${height - 33}px`;
+  document.querySelector("#colors").style.height = `${height}px`;
+  // document.querySelector("#options").style.height = `${height - 50}px`;
 }
