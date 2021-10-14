@@ -2,7 +2,8 @@
 window.addEventListener("DOMContentLoaded", start);
 
 let elementToPaint;
-let currentColor = "orange";
+let currentColor = "";
+const resetColor = "";
 const settings = {
   lit: true,
   mouth: 1,
@@ -16,6 +17,7 @@ let sliceB;
 
 async function start() {
   console.log("start");
+
   //Importing the main picture
   let respPumpkin = await fetch("img/pumpkin.svg");
   let svgPumpkin = await respPumpkin.text();
@@ -24,6 +26,9 @@ async function start() {
   stem = document.querySelector("#stem");
   sliceA = document.querySelector("#slicesA");
   sliceB = document.querySelector("#slicesB");
+
+  //botton reset click
+  document.querySelector("#reset").addEventListener("click", resetColors);
 
   setMenuListeners();
   manipulateSVG();
@@ -392,9 +397,28 @@ function animate(type) {
     { transform: `scale(1) translate(0,0)`, offset: 1, opacity: 1 },
   ];
 
-  let animation = document.querySelector(`#pumpkin-container .${type}`).animate(keyframes, properties);
+  let animation = document
+    .querySelector(`#pumpkin-container .${type}`)
+    .animate(keyframes, properties);
 
   animation.onfinish = () => {
     animation.cancel();
   };
+}
+
+function resetColors() {
+  console.log("color reset");
+  //reset current color
+
+  Array.from(stem.children).forEach((child) => {
+    setColor(child, resetColor);
+  });
+
+  Array.from(sliceA.children).forEach((child) => {
+    setColor(child, resetColor);
+  });
+
+  Array.from(sliceB.children).forEach((child) => {
+    setColor(child, resetColor);
+  });
 }
