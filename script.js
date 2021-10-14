@@ -223,7 +223,9 @@ async function importEyes() {
   // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
   let respEye = await fetch(`img/eye${settings.eyes}.svg`);
   let svgEye = await respEye.text();
+  animate("eye");
   document.querySelector("#pumpkin-container .eye").innerHTML = svgEye;
+
   colorEye();
 }
 
@@ -269,7 +271,9 @@ async function importNose() {
   // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
   let respNose = await fetch(`img/nose${settings.nose}.svg`);
   let svgNose = await respNose.text();
+  animate("nose");
   document.querySelector("#pumpkin-container .nose").innerHTML = svgNose;
+
   colorNose();
 }
 
@@ -321,6 +325,8 @@ async function importMouth() {
   // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
   let respMouth = await fetch(`img/mouth${settings.mouth}.svg`);
   let svgMouth = await respMouth.text();
+
+  animate("mouth");
   document.querySelector("#pumpkin-container .mouth").innerHTML = svgMouth;
 
   colorMouth();
@@ -362,4 +368,33 @@ function toggleBackground() {
   document.querySelector(
     "#pumpkin-container .background"
   ).style.backgroundImage = "url('" + this.dataset.feature + "')";
+}
+
+function animate(type) {
+  let width = document.querySelector("#pumpkin").offsetWidth;
+  let place;
+  if (type === "eye") {
+    place = (width / 100) * 30;
+  } else if (type === "mouth") {
+    place = (width / 100) * 60;
+  } else if (type === "nose") {
+    place = (width / 100) * 45;
+  }
+
+  const properties = {
+    duration: 400,
+    iterations: 1,
+    easing: "ease-in-out",
+  };
+
+  const keyframes = [
+    { transform: `scale(0) translate(0,${place}px)`, offset: 0, opacity: 0 },
+    { transform: `scale(1) translate(0,0)`, offset: 1, opacity: 1 },
+  ];
+
+  let animation = document.querySelector(`#pumpkin-container .${type}`).animate(keyframes, properties);
+
+  animation.onfinish = () => {
+    animation.cancel();
+  };
 }
