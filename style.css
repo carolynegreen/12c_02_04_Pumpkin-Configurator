@@ -1,22 +1,48 @@
 @import url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap");
 :root {
-  --font-1: "Creepster", cursive;
+  --font-1: "Chelsea Market", cursive;
+  --font-2: "Quicksand", sans-serif;
+  --font-3: "Cedarville Cursive", cursive;
   --color-1: #ffa900;
+  --color-2: hsla(28, 100%, 50%, 0.388);
+  --color-3: #ff7600;
 }
 
 body {
   margin-left: 2vw;
+  background: radial-gradient(#d4bea2, #f5e8c7);
 }
 
-header h1 {
-  font-family: var(--font-1);
-  font-size: 5vw;
-  letter-spacing: 0.5vw;
+header {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  line-height: 0.9vh;
+}
+
+h1 {
+  font-family: var(--font-3);
+  color: black;
+  font-size: 4vw;
   text-align: center;
 }
 
+h3 {
+  font-family: var(--font-1);
+  font-variant: small-caps;
+  font-style: italic;
+  color: var(--color-3);
+  text-shadow: 3px 3px 1px #ffa900;
+  font-size: 6.2vw;
+  letter-spacing: 0.5vw;
+  text-align: center;
+  margin: 0;
+}
+
 h2 {
+  font-family: var(--font-2);
   font-size: 2vw;
   text-align: center;
   color: white;
@@ -42,9 +68,26 @@ h2 {
   cursor: pointer;
 }
 
+button {
+  font-family: var(--font-2);
+  font-size: 1.4vw;
+  background-color: #ff7600;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  width: 9vw;
+  height: auto;
+  padding: 10px;
+  margin: 5vw;
+}
+
+button:hover {
+  background-color: var(--color-2);
+}
+
 #pumpkin-container {
   position: relative;
-  width: 80%;
+  width: 100%;
 }
 
 #pumpkin {
@@ -62,7 +105,8 @@ h2 {
 }
 
 #categories div {
-  font-size: 2vw;
+  font-family: var(--font-2);
+  font-size: 1.4vw;
   color: white;
   margin-top: 1rem;
   cursor: pointer;
@@ -158,4 +202,15 @@ figure {
 
 .selected {
   background-color: #ff7600;
+}
+
+footer {
+  background-color: var(--color-1);
+  border-radius: 12px;
+  box-shadow: 3px 3px 1px #ff7600;
+  font-family: var(--font-2);
+  color: white;
+  font-size: 12px;
+  margin-top: 1.2vw;
+  padding: 1%;
 }

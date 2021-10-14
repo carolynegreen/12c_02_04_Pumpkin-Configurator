@@ -97,6 +97,7 @@ function colorPumpkin() {
   sliceA.addEventListener("click", (event) => {
     setColor(event.target, currentColor);
   });
+
   sliceB.addEventListener("click", (event) => {
     setColor(event.target, currentColor);
   });
