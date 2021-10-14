@@ -2,7 +2,6 @@
 window.addEventListener("DOMContentLoaded", start);
 window.addEventListener("resize", setHeight);
 
-let elementToPaint;
 let currentColor = "";
 const resetColor = "";
 const settings = {
@@ -43,7 +42,6 @@ function setColor(part, colorFill) {
 function manipulateSVG() {
   console.log("manipulation");
 
-  // importEyes(2);
   selectPumpkinGroups();
   noClickOnShadows();
   document.querySelectorAll(".g_to_interact_with").forEach(prepareArea);
@@ -53,7 +51,6 @@ function selectPumpkinGroups() {
   document.querySelector("#stem").classList.add("g_to_interact_with");
   document.querySelector("#slicesA").classList.add("g_to_interact_with");
   document.querySelector("#slicesB").classList.add("g_to_interact_with");
-  document.querySelectorAll(".g_to_interact_with").forEach(colorPumpkin);
   colorPumpkin();
 }
 
@@ -64,34 +61,19 @@ function noClickOnShadows() {
 }
 
 function prepareArea(area) {
-  if (localStorage.getItem(area.id) === null) {
-    area.style.fill = "#f2ecde";
-  } else {
-    area.style.fill = localStorage.getItem(area.id);
-  }
+  //set a start color + cursor
+  area.style.fill = "#f2ecde";
   area.style.cursor = "pointer";
 
+  //finding the paths inside each area and removing their fill
   area.querySelectorAll("path").forEach(removeFill);
   function removeFill(path) {
     path.removeAttribute("fill");
   }
   area.style.zIndex = "20";
-  area.addEventListener("click", setElementToPaint);
-}
-
-function setElementToPaint() {
-  elementToPaint = this;
-  document.querySelectorAll(".g_to_interact_with").forEach(removeStroke);
-  // elementToPaint.style.stroke = "orange";
-  // elementToPaint.style.strokeWidth = "25";
-  // elementToPaint.style.strokeDasharray = "100";
 }
 
 function colorPumpkin() {
-  setColor(stem, currentColor);
-  setColor(sliceA, currentColor);
-  setColor(sliceB, currentColor);
-
   stem.addEventListener("click", (event) => {
     setColor(event.target, currentColor);
   });
@@ -113,13 +95,8 @@ function colorPumpkin() {
           path.style.stroke = currentColor;
         });
       });
-      console.log(currentColor);
     });
   });
-}
-
-function removeStroke(area) {
-  area.style.stroke = "none";
 }
 
 function setMenuListeners() {
@@ -137,20 +114,21 @@ function setMenuListeners() {
 }
 
 function toggleMenu() {
+  //closing all tabs
   document.querySelector("#nose").classList.add("hidden");
   document.querySelector("#eyes").classList.add("hidden");
   document.querySelector("#mouth").classList.add("hidden");
   document.querySelector("#background").classList.add("hidden");
   document.querySelector("#candle").classList.add("hidden");
 
-  let idName = this.textContent.toLowerCase();
-
+  //removing selected class from all categories
   document.querySelector("#categories div:nth-of-type(1)").classList.remove("selected");
   document.querySelector("#categories div:nth-of-type(2)").classList.remove("selected");
   document.querySelector("#categories div:nth-of-type(3)").classList.remove("selected");
   document.querySelector("#categories div:nth-of-type(4)").classList.remove("selected");
   document.querySelector("#categories div:nth-of-type(5)").classList.remove("selected");
 
+  //adding selected class to the chosen option
   if (this.textContent === "Eyes") {
     document.querySelector("#categories div:nth-of-type(1)").classList.add("selected");
   } else if (this.textContent === "Nose") {
@@ -163,6 +141,8 @@ function toggleMenu() {
     document.querySelector("#categories div:nth-of-type(5)").classList.add("selected");
   }
 
+  //remove hidden class from chosen option
+  let idName = this.textContent.toLowerCase();
   document.querySelector(`#${idName}`).classList.remove("hidden");
 }
 
@@ -179,21 +159,23 @@ function toggleLight() {
     document.querySelector("#candle figcaption").textContent = "extinguish candle";
   }
 
+  //color face based on light
   colorEye();
   colorMouth();
   colorNose();
 }
 
 function setEyes(choice) {
-  choice = choice.path[0].attributes[2].value;
-  settings.eyes = choice;
-  importEyes();
+  if (this.textContent.trim() === "No Eyes") {
+    document.querySelector("#pumpkin-container .eye").innerHTML = "";
+  } else {
+    choice = choice.path[0].attributes[2].value;
+    settings.eyes = choice;
+    importEyes();
+  }
 }
 
 async function importEyes() {
-  // console.log(choice.path[0].attributes[2].value);
-  // choice = choice.path[0].attributes[2].value;
-  // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
   let respEye = await fetch(`img/eye${settings.eyes}.svg`);
   let svgEye = await respEye.text();
   animate("eye");
@@ -225,15 +207,17 @@ function colorEye() {
 }
 
 function setNose(choice) {
-  choice = choice.path[0].attributes[2].value;
-  settings.nose = choice;
-  importNose();
+  if (this.textContent.trim() === "No Nose") {
+    console.log("no nose");
+    document.querySelector("#pumpkin-container .nose").innerHTML = "";
+  } else {
+    choice = choice.path[0].attributes[2].value;
+    settings.nose = choice;
+    importNose();
+  }
 }
 
 async function importNose() {
-  // console.log(choice.path[0].attributes[2].value);
-  // choice = choice.path[0].attributes[2].value;
-  // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
   let respNose = await fetch(`img/nose${settings.nose}.svg`);
   let svgNose = await respNose.text();
   animate("nose");
@@ -243,6 +227,8 @@ async function importNose() {
 }
 
 function colorNose() {
+  //first we decide if the light is lit or not
+  //using different colors for the depth of the shell and the inside of the pumpkin
   if (settings.lit === true) {
     document.querySelectorAll(`#nose${settings.nose} path`).forEach(colorElementOrange);
     document.querySelectorAll(`#nose${settings.nose} #shell`).forEach(colorElementBrown);
@@ -267,15 +253,18 @@ function colorNose() {
 }
 
 function setMouth(choice) {
-  choice = choice.path[0].attributes[2].value;
-  settings.mouth = choice;
-  importMouth();
+  // console.log(this.textContent.trim());
+  if (this.textContent.trim() === "No Mouth") {
+    console.log("no mouth");
+    document.querySelector("#pumpkin-container .mouth").innerHTML = "";
+  } else {
+    choice = choice.path[0].attributes[2].value;
+    settings.mouth = choice;
+    importMouth();
+  }
 }
 
 async function importMouth() {
-  // console.log(choice.path[0].attributes[2].value);
-  // choice = choice.path[0].attributes[2].value;
-  // console.log(document.querySelector(`#pumpkin-container img[src= "img/eye1.svg"]`));
   let respMouth = await fetch(`img/mouth${settings.mouth}.svg`);
   let svgMouth = await respMouth.text();
 
@@ -309,7 +298,6 @@ function colorMouth() {
 
 function toggleBackground() {
   console.log("toggle background");
-  // document.querySelector("#pumpkin-container .background").backgroundImage.src = `"url('${this.dataset.feature}')"`;
   document.querySelector("#pumpkin-container .background").style.backgroundImage = "url('" + this.dataset.feature + "')";
 }
 
@@ -363,5 +351,4 @@ function setHeight() {
   let height = document.querySelector("#pumpkin").offsetHeight;
   document.querySelector(".sidenavigation").style.height = `${height - 33}px`;
   document.querySelector("#colors").style.height = `${height}px`;
-  // document.querySelector("#options").style.height = `${height - 50}px`;
 }

@@ -18,70 +18,14 @@
         <div id="colors">
           <h2>Choose a Color For Your Pumpkin</h2>
           <svg class="palette" viewBox="0 0 250 330">
-            <circle
-              id="color1"
-              class="colorbtn"
-              cx="80"
-              cy="40"
-              r="30"
-              style="fill: #5f0f40"
-            ></circle>
-            <circle
-              id="color2"
-              class="colorbtn"
-              cx="175"
-              cy="40"
-              r="30"
-              style="fill: #9a031e"
-            ></circle>
-            <circle
-              id="color3"
-              class="colorbtn"
-              cx="80"
-              cy="125"
-              r="30"
-              style="fill: #0f4c5c"
-            ></circle>
-            <circle
-              id="color4"
-              class="colorbtn"
-              cx="175"
-              cy="125"
-              r="30"
-              style="fill: #606c38"
-            ></circle>
-            <circle
-              id="color5"
-              class="colorbtn"
-              cx="80"
-              cy="210"
-              r="30"
-              style="fill: #dc7c00"
-            ></circle>
-            <circle
-              id="color6"
-              class="colorbtn"
-              cx="175"
-              cy="210"
-              r="30"
-              style="fill: #4a1b1f"
-            ></circle>
-            <circle
-              id="color7"
-              class="colorbtn"
-              cx="80"
-              cy="300"
-              r="30"
-              style="fill: black"
-            ></circle>
-            <circle
-              id="color8"
-              class="colorbtn"
-              cx="175"
-              cy="300"
-              r="30"
-              style="fill: #e36414"
-            ></circle>
+            <circle id="color1" class="colorbtn" cx="80" cy="40" r="30" style="fill: #5f0f40"></circle>
+            <circle id="color2" class="colorbtn" cx="175" cy="40" r="30" style="fill: #9a031e"></circle>
+            <circle id="color3" class="colorbtn" cx="80" cy="125" r="30" style="fill: #0f4c5c"></circle>
+            <circle id="color4" class="colorbtn" cx="175" cy="125" r="30" style="fill: #606c38"></circle>
+            <circle id="color5" class="colorbtn" cx="80" cy="210" r="30" style="fill: #dc7c00"></circle>
+            <circle id="color6" class="colorbtn" cx="175" cy="210" r="30" style="fill: #4a1b1f"></circle>
+            <circle id="color7" class="colorbtn" cx="80" cy="300" r="30" style="fill: black"></circle>
+            <circle id="color8" class="colorbtn" cx="175" cy="300" r="30" style="fill: #e36414"></circle>
           </svg>
           <button id="reset">Reset</button>
         </div>
@@ -122,49 +66,31 @@
               <div class="option">
                 <img src="img/eye6.png" alt="Pumpkin Eyes" data-feature="6" />
               </div>
+              <div class="option">
+                <p data-feature="7">No Eyes</p>
+              </div>
             </div>
             <div id="mouth" class="hidden">
               <div class="option">
-                <img
-                  src="img/mouth1.png"
-                  alt="Pumpkin Mouth"
-                  data-feature="1"
-                />
+                <img src="img/mouth1.png" alt="Pumpkin Mouth" data-feature="1" />
               </div>
               <div class="option">
-                <img
-                  src="img/mouth2.png"
-                  alt="Pumpkin Mouth"
-                  data-feature="2"
-                />
+                <img src="img/mouth2.png" alt="Pumpkin Mouth" data-feature="2" />
               </div>
               <div class="option">
-                <img
-                  src="img/mouth3.png"
-                  alt="Pumpkin Mouth"
-                  data-feature="3"
-                />
+                <img src="img/mouth3.png" alt="Pumpkin Mouth" data-feature="3" />
               </div>
               <div class="option">
-                <img
-                  src="img/mouth4.png"
-                  alt="Pumpkin Mouth"
-                  data-feature="4"
-                />
+                <img src="img/mouth4.png" alt="Pumpkin Mouth" data-feature="4" />
               </div>
               <div class="option">
-                <img
-                  src="img/mouth5.png"
-                  alt="Pumpkin Mouth"
-                  data-feature="5"
-                />
+                <img src="img/mouth5.png" alt="Pumpkin Mouth" data-feature="5" />
               </div>
               <div class="option">
-                <img
-                  src="img/mouth6.png"
-                  alt="Pumpkin Mouth"
-                  data-feature="6"
-                />
+                <img src="img/mouth6.png" alt="Pumpkin Mouth" data-feature="6" />
+              </div>
+              <div class="option">
+                <p data-feature="7">No Mouth</p>
               </div>
             </div>
             <div id="nose" class="hidden">
@@ -186,6 +112,9 @@
               <div class="option">
                 <img src="img/nose6.png" alt="Pumpkin Nose" data-feature="6" />
               </div>
+              <div class="option">
+                <p data-feature="7">No Nose</p>
+              </div>
             </div>
             <div id="background" class="hidden">
               <figure data-feature="img/bg1.png">
@@ -198,7 +127,11 @@
               </figure>
               <figure data-feature="img/bg3.png">
                 <img src="img/bg3.png" alt="girl picking up pumpkin" />
-                <figcaption>Girl collecting pumpkin</figcaption>
+                <figcaption>Girl Collecting Pumpkin</figcaption>
+              </figure>
+              <figure data-feature="img/bg4.png">
+                <img src="img/bg4.png" alt="orange background" />
+                <figcaption>No Background</figcaption>
               </figure>
             </div>
             <figure id="candle" class="hidden">
@@ -214,26 +147,11 @@
       <div>
         <p>
           Pumpkin Configurator | Created by
-          <a
-            href="https://github.com/rikkeblom"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Rikke</a
-          >
+          <a href="https://github.com/rikkeblom" target="_blank" rel="noopener noreferrer">Rikke</a>
           &
-          <a
-            href="https://github.com/carolynegreen"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Carolyne</a
-          >
+          <a href="https://github.com/carolynegreen" target="_blank" rel="noopener noreferrer">Carolyne</a>
           |
-          <a
-            href="https://kea.dk/uddannelser/erhvervsakademi/multimediedesigner"
-            target="_blank"
-            rel="noopener noreferrer"
-            >KEA Multimedia Design</a
-          >
+          <a href="https://kea.dk/uddannelser/erhvervsakademi/multimediedesigner" target="_blank" rel="noopener noreferrer">KEA Multimedia Design</a>
           2021
         </p>
       </div>
